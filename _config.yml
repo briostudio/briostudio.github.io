@@ -1,5 +1,5 @@
-title: EPD Studios
-description: "We optimise for outcomes, create pleasant product experiences, and deliver on promises."
+title: Brio Studio
+description: "Engineering. Product. Delivery. We optimise for outcomes, create pleasant product experiences, and deliver on promises."
 url: "https://briostudio.github.io"
 baseurl: ""
 
@@ -11,9 +11,9 @@ plugins:
   - jekyll-seo-tag
 
 # Site settings
-author: EPD Studios
-email: hello@epdstudios.com
-twitter_username: epdstudios
+author: Brio Studio
+email: hello@briostudio.com
+twitter_username: briostudio
 github_username: briostudio
 
 # Exclude from processing

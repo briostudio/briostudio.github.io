@@ -1,5 +1,5 @@
 /* =============================================
-   EPD Studios — Central Stylesheet
+   Brio — Central Stylesheet
    =============================================
    All design tokens, custom properties, and
    component-level overrides live in this one
@@ -11,62 +11,84 @@
 
 /* ===========================================
    1. DESIGN TOKENS — LIGHT
+   Light blue → purple palette, bright & airy
    =========================================== */
 
 :root,
 .light {
-  --color-bg:             #FAFAFA;
+  --color-bg:             #FEFEFE;
   --color-bg-alt:         #FFFFFF;
-  --color-bg-elevated:    #F0F0F0;
+  --color-bg-elevated:    #F3F0FF;
   --color-surface:        #FFFFFF;
-  --color-surface-hover:  #F5F5F5;
-  --color-border:         #E5E5E5;
-  --color-border-subtle:  #EBEBEB;
+  --color-surface-hover:  #F8F6FF;
+  --color-border:         #E8E0F7;
+  --color-border-subtle:  #F0EBF9;
 
-  --color-text:           #1A1A1A;
-  --color-text-secondary: #666666;
-  --color-text-muted:     #999999;
+  --color-text:           #1E1B2E;
+  --color-text-secondary: #5B5675;
+  --color-text-muted:     #9490A8;
 
-  --color-accent:         #2563EB;
-  --color-accent-hover:   #1D4ED8;
-  --color-accent-light:   #DBEAFE;
-  --color-accent-subtle:  #EFF6FF;
+  --color-accent:         #7C3AED;
+  --color-accent-hover:   #6D28D9;
+  --color-accent-light:   #DDD6FE;
+  --color-accent-subtle:  #F5F3FF;
 
-  --header-bg:            rgba(250, 250, 250, 0.85);
-  --hero-gradient:        linear-gradient(135deg, #FAFAFA 0%, #F0F4FF 50%, #FAFAFA 100%);
+  /* Gradient accent for hero CTA & accents */
+  --gradient-accent:      linear-gradient(135deg, #38BDF8 0%, #818CF8 50%, #A78BFA 100%);
+  --gradient-accent-hover:linear-gradient(135deg, #0EA5E9 0%, #6366F1 50%, #8B5CF6 100%);
+  --gradient-text:        linear-gradient(135deg, #38BDF8 0%, #818CF8 40%, #A78BFA 100%);
+
+  --header-bg:            rgba(254, 254, 254, 0.85);
+  --hero-gradient:        linear-gradient(135deg, #FEFEFE 0%, #F0F0FF 30%, #E8F4FD 60%, #F5F3FF 100%);
   --card-bg:              #FFFFFF;
-  --card-border:          #E5E5E5;
-  --glow:                 rgba(37, 99, 235, 0.08);
+  --card-border:          #E8E0F7;
+  --glow:                 rgba(124, 58, 237, 0.06);
+
+  /* Sparkle colours */
+  --sparkle-1:            #38BDF8;
+  --sparkle-2:            #818CF8;
+  --sparkle-3:            #A78BFA;
+  --sparkle-4:            #C084FC;
 }
 
 
 /* ===========================================
    2. DESIGN TOKENS — DARK
+   Deeper purples, luminous highlights
    =========================================== */
 
 .dark {
-  --color-bg:             #0A0A0A;
-  --color-bg-alt:         #111111;
-  --color-bg-elevated:    #1A1A1A;
-  --color-surface:        #161616;
-  --color-surface-hover:  #1E1E1E;
-  --color-border:         #2A2A2A;
-  --color-border-subtle:  #222222;
+  --color-bg:             #0C0A14;
+  --color-bg-alt:         #110E1C;
+  --color-bg-elevated:    #1A1528;
+  --color-surface:        #15112A;
+  --color-surface-hover:  #1E1835;
+  --color-border:         #2A2540;
+  --color-border-subtle:  #211D35;
 
-  --color-text:           #F5F5F5;
-  --color-text-secondary: #A0A0A0;
-  --color-text-muted:     #666666;
+  --color-text:           #F0ECF9;
+  --color-text-secondary: #A8A0C0;
+  --color-text-muted:     #6B6488;
 
-  --color-accent:         #60A5FA;
-  --color-accent-hover:   #93C5FD;
-  --color-accent-light:   #1E3A5F;
-  --color-accent-subtle:  #0F1D2F;
+  --color-accent:         #A78BFA;
+  --color-accent-hover:   #C4B5FD;
+  --color-accent-light:   #2E2550;
+  --color-accent-subtle:  #1A1530;
 
-  --header-bg:            rgba(10, 10, 10, 0.85);
-  --hero-gradient:        linear-gradient(135deg, #0A0A0A 0%, #0F1525 50%, #0A0A0A 100%);
-  --card-bg:              #161616;
-  --card-border:          #2A2A2A;
-  --glow:                 rgba(96, 165, 250, 0.06);
+  --gradient-accent:      linear-gradient(135deg, #38BDF8 0%, #818CF8 50%, #C084FC 100%);
+  --gradient-accent-hover:linear-gradient(135deg, #7DD3FC 0%, #A5B4FC 50%, #D8B4FE 100%);
+  --gradient-text:        linear-gradient(135deg, #7DD3FC 0%, #A5B4FC 40%, #C4B5FD 100%);
+
+  --header-bg:            rgba(12, 10, 20, 0.85);
+  --hero-gradient:        linear-gradient(135deg, #0C0A14 0%, #13102A 30%, #0E1525 60%, #110E1C 100%);
+  --card-bg:              #15112A;
+  --card-border:          #2A2540;
+  --glow:                 rgba(167, 139, 250, 0.06);
+
+  --sparkle-1:            #7DD3FC;
+  --sparkle-2:            #A5B4FC;
+  --sparkle-3:            #C4B5FD;
+  --sparkle-4:            #D8B4FE;
 }
 
 
@@ -88,8 +110,6 @@ html {
 
 /* ===========================================
    4. SEMANTIC COLOUR UTILITIES
-   Map Tailwind-style classes → CSS variables
-   so markup stays readable.
    =========================================== */
 
 /* Backgrounds */
@@ -104,6 +124,18 @@ html {
 .bg-accent-fill  { background-color: var(--color-accent); }
 .bg-accent-h     { background-color: var(--color-accent-hover); }
 .bg-glow         { background: radial-gradient(circle, var(--glow) 0%, transparent 60%); }
+
+/* Gradient fills */
+.bg-gradient-accent       { background: var(--gradient-accent); }
+.bg-gradient-accent-hover { background: var(--gradient-accent-hover); }
+
+/* Gradient text */
+.text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 /* Text */
 .text-primary    { color: var(--color-text); }
@@ -122,23 +154,17 @@ html {
    =========================================== */
 
 /* --- Nav link animated underline --- */
-.nav-underline {
-  position: relative;
-}
+.nav-underline { position: relative; }
 .nav-underline::after {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--color-accent);
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--gradient-accent);
   border-radius: 1px;
   transition: width 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.nav-underline:hover::after {
-  width: 100%;
-}
+.nav-underline:hover::after { width: 100%; }
 
 /* --- Card lift on hover --- */
 .card-lift {
@@ -148,54 +174,60 @@ html {
 }
 .card-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.08);
   border-color: var(--color-accent-light);
 }
 .dark .card-lift:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 40px rgba(167, 139, 250, 0.12);
 }
 
-/* --- Top-bar accent (approach cards) --- */
-.accent-bar {
-  position: relative;
-  overflow: hidden;
-}
+/* --- Top-bar gradient accent (approach cards) --- */
+.accent-bar { position: relative; overflow: hidden; }
 .accent-bar::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: var(--color-accent);
+  background: var(--gradient-accent);
   border-radius: 1px;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.accent-bar:hover::before {
-  transform: scaleX(1);
-}
+.accent-bar:hover::before { transform: scaleX(1); }
 
 /* --- Value-item left marker --- */
 .value-marker {
   width: 3px;
   border-radius: 2px;
   flex-shrink: 0;
-  background: var(--color-accent);
+  background: var(--gradient-accent);
   opacity: 0.5;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.group:hover .value-marker {
-  opacity: 1;
-}
+.group:hover .value-marker { opacity: 1; }
 
 /* --- Section label dash --- */
 .section-dash::before {
   content: '';
   display: inline-block;
-  width: 1.5rem;
-  height: 2px;
-  background: var(--color-accent);
+  width: 1.5rem; height: 2px;
+  background: var(--gradient-accent);
   border-radius: 1px;
+}
+
+/* --- Gradient button --- */
+.btn-gradient {
+  background: var(--gradient-accent);
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.25);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-gradient:hover {
+  background: var(--gradient-accent-hover);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35);
+  transform: translateY(-1px);
+  color: #FFFFFF;
 }
 
 
@@ -209,19 +241,14 @@ html {
   transform: translateY(24px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* Pulsing dot */
 @keyframes pulse-slow {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.4; }
 }
-.animate-pulse-slow {
-  animation: pulse-slow 2s ease-in-out infinite;
-}
+.animate-pulse-slow { animation: pulse-slow 2s ease-in-out infinite; }
 
 /* Floating particles */
 @keyframes float {
@@ -241,9 +268,7 @@ html {
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .group:hover .arrow-slide,
-a:hover .arrow-slide {
-  transform: translateX(4px);
-}
+a:hover .arrow-slide { transform: translateX(4px); }
 
 
 /* ===========================================
@@ -264,19 +289,24 @@ a:hover .arrow-slide {
    =========================================== */
 
 .hamburger span {
-  display: block;
-  width: 100%;
-  height: 2px;
+  display: block; width: 100%; height: 2px;
   background: var(--color-text);
   border-radius: 1px;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+
+/* ===========================================
+   9. CURSOR SPARKLE CANVAS
+   =========================================== */
+
+#sparkle-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 9999;
 }
