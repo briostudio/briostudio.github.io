@@ -1,0 +1,40 @@
+<!-- ==================== FOOTER ==================== -->
+<footer class="bg-primary border-t border-theme pt-24 pb-8 transition-colors duration-300">
+  <div class="max-w-[1200px] mx-auto px-6">
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] gap-12 mb-16">
+
+      <!-- Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="{{ '/' | relative_url }}" class="flex items-center gap-1.5 no-underline text-primary mb-6">
+          <span class="font-heading font-bold text-xl tracking-tight bg-accent-fill text-white px-2 py-0.5 rounded">EPD</span>
+          <span class="font-heading font-semibold text-lg tracking-tight">Studios</span>
+        </a>
+        <p class="text-[0.9375rem] text-muted leading-relaxed">Optimising for outcomes.<br>Delivering on promises.</p>
+      </div>
+
+      <!-- Navigate -->
+      <div class="flex flex-col gap-2">
+        <h4 class="font-heading font-semibold text-sm text-primary uppercase tracking-wider mb-2">Navigate</h4>
+        <a href="#approach" class="text-sm text-secondary hover:text-accent py-1 transition-colors">Approach</a>
+        <a href="#services" class="text-sm text-secondary hover:text-accent py-1 transition-colors">Services</a>
+        <a href="#values"   class="text-sm text-secondary hover:text-accent py-1 transition-colors">Values</a>
+        <a href="#contact"  class="text-sm text-secondary hover:text-accent py-1 transition-colors">Contact</a>
+      </div>
+
+      <!-- Connect -->
+      <div class="flex flex-col gap-2">
+        <h4 class="font-heading font-semibold text-sm text-primary uppercase tracking-wider mb-2">Connect</h4>
+        <a href="https://github.com/{{ site.github_username }}" target="_blank" rel="noopener" class="text-sm text-secondary hover:text-accent py-1 transition-colors">GitHub</a>
+        <a href="https://twitter.com/{{ site.twitter_username }}" target="_blank" rel="noopener" class="text-sm text-secondary hover:text-accent py-1 transition-colors">Twitter</a>
+        <a href="mailto:{{ site.email }}" class="text-sm text-secondary hover:text-accent py-1 transition-colors">Email</a>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-subtle">
+      <p class="text-[0.8125rem] text-muted">&copy; {{ 'now' | date: '%Y' }} EPD Studios. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

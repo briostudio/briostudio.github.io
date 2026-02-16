@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPD Studios — Engineering Pleasant Digital Experiences</title>
+  <meta name="description" content="We optimise for outcomes, create pleasant product experiences, and deliver on promises.">
+
+  <meta name="og:title" content="EPD Studios — Engineering Pleasant Digital Experiences">
+  <meta name="og:description" content="We optimise for outcomes, create pleasant product experiences, and deliver on promises.">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"Space Grotesk"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            body: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            accent: {
+              DEFAULT: 'var(--color-accent)',
+              hover:   'var(--color-accent-hover)',
+              light:   'var(--color-accent-light)',
+              subtle:  'var(--color-accent-subtle)',
+            },
+            surface: {
+              DEFAULT: 'var(--color-surface)',
+              hover:   'var(--color-surface-hover)',
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Single central stylesheet -->
+  <style>
+/* =============================================
+   EPD Studios — Central Stylesheet
+   =============================================
+   All design tokens, custom properties, and
+   component-level overrides live in this one
+   file. Tailwind utilities handle layout and
+   spacing; this file owns colour, motion, and
+   reusable patterns.
+   ============================================= */
+
+
+/* ===========================================
+   1. DESIGN TOKENS — LIGHT
+   =========================================== */
+
+:root,
+.light {
+  --color-bg:             #FAFAFA;
+  --color-bg-alt:         #FFFFFF;
+  --color-bg-elevated:    #F0F0F0;
+  --color-surface:        #FFFFFF;
+  --color-surface-hover:  #F5F5F5;
+  --color-border:         #E5E5E5;
+  --color-border-subtle:  #EBEBEB;
+
+  --color-text:           #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-text-muted:     #999999;
+
+  --color-accent:         #2563EB;
+  --color-accent-hover:   #1D4ED8;
+  --color-accent-light:   #DBEAFE;
+  --color-accent-subtle:  #EFF6FF;
+
+  --header-bg:            rgba(250, 250, 250, 0.85);
+  --hero-gradient:        linear-gradient(135deg, #FAFAFA 0%, #F0F4FF 50%, #FAFAFA 100%);
+  --card-bg:              #FFFFFF;
+  --card-border:          #E5E5E5;
+  --glow:                 rgba(37, 99, 235, 0.08);
+}
+
+
+/* ===========================================
+   2. DESIGN TOKENS — DARK
+   =========================================== */
+
+.dark {
+  --color-bg:             #0A0A0A;
+  --color-bg-alt:         #111111;
+  --color-bg-elevated:    #1A1A1A;
+  --color-surface:        #161616;
+  --color-surface-hover:  #1E1E1E;
+  --color-border:         #2A2A2A;
+  --color-border-subtle:  #222222;
+
+  --color-text:           #F5F5F5;
+  --color-text-secondary: #A0A0A0;
+  --color-text-muted:     #666666;
+
+  --color-accent:         #60A5FA;
+  --color-accent-hover:   #93C5FD;
+  --color-accent-light:   #1E3A5F;
+  --color-accent-subtle:  #0F1D2F;
+
+  --header-bg:            rgba(10, 10, 10, 0.85);
+  --hero-gradient:        linear-gradient(135deg, #0A0A0A 0%, #0F1525 50%, #0A0A0A 100%);
+  --card-bg:              #161616;
+  --card-border:          #2A2A2A;
+  --glow:                 rgba(96, 165, 250, 0.06);
+}
+
+
+/* ===========================================
+   3. BASE
+   =========================================== */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+
+/* ===========================================
+   4. SEMANTIC COLOUR UTILITIES
+   Map Tailwind-style classes → CSS variables
+   so markup stays readable.
+   =========================================== */
+
+/* Backgrounds */
+.bg-primary      { background-color: var(--color-bg); }
+.bg-alt          { background-color: var(--color-bg-alt); }
+.bg-elevated     { background-color: var(--color-bg-elevated); }
+.bg-surface      { background-color: var(--color-surface); }
+.bg-card         { background-color: var(--card-bg); }
+.bg-hero         { background: var(--hero-gradient); }
+.bg-header       { background: var(--header-bg); }
+.bg-accent-s     { background-color: var(--color-accent-subtle); }
+.bg-accent-fill  { background-color: var(--color-accent); }
+.bg-accent-h     { background-color: var(--color-accent-hover); }
+.bg-glow         { background: radial-gradient(circle, var(--glow) 0%, transparent 60%); }
+
+/* Text */
+.text-primary    { color: var(--color-text); }
+.text-secondary  { color: var(--color-text-secondary); }
+.text-muted      { color: var(--color-text-muted); }
+.text-accent     { color: var(--color-accent); }
+
+/* Borders */
+.border-theme    { border-color: var(--color-border); }
+.border-subtle   { border-color: var(--color-border-subtle); }
+.border-accent-l { border-color: var(--color-accent-light); }
+
+
+/* ===========================================
+   5. COMPONENT PATTERNS
+   =========================================== */
+
+/* --- Nav link animated underline --- */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transition: width 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-underline:hover::after {
+  width: 100%;
+}
+
+/* --- Card lift on hover --- */
+.card-lift {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-accent-light);
+}
+.dark .card-lift:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Top-bar accent (approach cards) --- */
+.accent-bar {
+  position: relative;
+  overflow: hidden;
+}
+.accent-bar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accent-bar:hover::before {
+  transform: scaleX(1);
+}
+
+/* --- Value-item left marker --- */
+.value-marker {
+  width: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  background: var(--color-accent);
+  opacity: 0.5;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.group:hover .value-marker {
+  opacity: 1;
+}
+
+/* --- Section label dash --- */
+.section-dash::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+}
+
+
+/* ===========================================
+   6. ANIMATIONS
+   =========================================== */
+
+/* Scroll reveal */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pulsing dot */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+/* Floating particles */
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-20px) scale(1.2); }
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.15;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Arrow slide on hover */
+.arrow-slide {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.group:hover .arrow-slide,
+a:hover .arrow-slide {
+  transform: translateX(4px);
+}
+
+
+/* ===========================================
+   7. HERO MOCK UI
+   =========================================== */
+
+.chart-bar:nth-child(1) { height: 40%; }
+.chart-bar:nth-child(2) { height: 65%; }
+.chart-bar:nth-child(3) { height: 50%; }
+.chart-bar:nth-child(4) { height: 85%; }
+.chart-bar:nth-child(5) { height: 70%; }
+.chart-bar:nth-child(6) { height: 95%; }
+.chart-bar:nth-child(7) { height: 75%; }
+
+
+/* ===========================================
+   8. HAMBURGER MENU
+   =========================================== */
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 1px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+  </style><link rel="stylesheet" hidden>
+
+  <!-- Theme: apply before paint to prevent flash -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('epd-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.classList.remove('light','dark');
+      document.documentElement.classList.add(t);
+    })();
+  </script>
+</head>
+<body class="font-body bg-primary text-primary transition-colors duration-300 overflow-x-hidden">
+
+  <!-- ==================== HEADER ==================== -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-header backdrop-blur-xl border-b border-subtle transition-colors duration-300">
+  <nav class="max-w-[1200px] mx-auto px-6 flex items-center justify-between h-16">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-1.5 no-underline text-primary">
+      <span class="font-heading font-bold text-xl tracking-tight bg-accent-fill text-white px-2 py-0.5 rounded">EPD</span>
+      <span class="font-heading font-semibold text-lg tracking-tight">Studios</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#approach" class="text-sm font-medium text-secondary hover:text-primary nav-underline transition-colors">Approach</a>
+      <a href="#services" class="text-sm font-medium text-secondary hover:text-primary nav-underline transition-colors">Services</a>
+      <a href="#values"   class="text-sm font-medium text-secondary hover:text-primary nav-underline transition-colors">Values</a>
+      <a href="#contact"  class="text-sm font-medium bg-accent-fill text-white px-5 py-2 rounded-full hover:bg-accent-h hover:-translate-y-0.5 hover:shadow-lg transition-all">Let's Talk</a>
+
+      <!-- Theme toggle -->
+      <button id="theme-toggle" aria-label="Toggle dark mode"
+        class="flex items-center justify-center w-9 h-9 rounded-full border border-theme bg-surface text-secondary hover:border-accent-l hover:text-accent hover:bg-accent-s transition-all cursor-pointer ml-1">
+        <!-- Sun (shown in dark mode) -->
+        <svg class="hidden dark:block w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <!-- Moon (shown in light mode) -->
+        <svg class="block dark:hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="mobile-menu-toggle" aria-label="Toggle menu"
+      class="flex md:hidden flex-col justify-center gap-[5px] w-9 h-9 p-1.5 bg-transparent border-none cursor-pointer hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden flex-col gap-4 px-6 py-6 bg-primary border-b border-theme md:hidden">
+    <a href="#approach" class="text-base font-medium text-secondary hover:text-accent py-2 border-b border-subtle transition-colors">Approach</a>
+    <a href="#services" class="text-base font-medium text-secondary hover:text-accent py-2 border-b border-subtle transition-colors">Services</a>
+    <a href="#values"   class="text-base font-medium text-secondary hover:text-accent py-2 border-b border-subtle transition-colors">Values</a>
+    <a href="#contact"  class="text-base font-semibold text-accent py-2 transition-colors">Let's Talk</a>
+  </div>
+</header>
+
+
+  <main>
+    
+<!-- ==================== HERO ==================== -->
+<section class="min-h-screen flex items-center relative bg-hero overflow-hidden pt-16">
+
+  <!-- Particles -->
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="particle w-1 h-1" style="top:20%;left:10%;animation-delay:0s"></div>
+    <div class="particle w-1.5 h-1.5" style="top:60%;left:85%;animation-delay:1s"></div>
+    <div class="particle w-1 h-1" style="top:80%;left:30%;animation-delay:2s"></div>
+    <div class="particle w-[5px] h-[5px]" style="top:15%;left:70%;animation-delay:3s"></div>
+    <div class="particle w-1 h-1" style="top:45%;left:50%;animation-delay:4s"></div>
+    <div class="particle w-[3px] h-[3px]" style="top:75%;left:60%;animation-delay:1.5s"></div>
+  </div>
+
+  <div class="max-w-[1200px] mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+    <!-- Left: Copy -->
+    <div class="relative z-10 text-center lg:text-left fade-in">
+
+      <div class="inline-flex items-center gap-2 bg-accent-s border border-accent-l text-accent text-[0.8125rem] font-semibold px-4 py-1.5 rounded-full mb-10">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent-fill animate-pulse-slow"></span>
+        Engineering Product Delivery
+      </div>
+
+      <h1 class="font-heading font-bold tracking-[-0.03em] leading-[1.08] text-primary mb-8"
+          style="font-size:clamp(2.5rem,5vw,4.5rem)">
+        We build products<br>
+        that <span class="text-accent">deliver</span>.
+      </h1>
+
+      <p class="text-secondary leading-relaxed max-w-[48ch] mb-10 mx-auto lg:mx-0"
+         style="font-size:clamp(1.0625rem,1.5vw,1.1875rem)">
+        EPD Studios optimises for outcomes, creates pleasant product experiences,
+        and delivers on promises. Every time.
+      </p>
+
+      <div class="flex items-center gap-6 flex-wrap justify-center lg:justify-start">
+        <a href="#contact"
+           class="inline-flex items-center gap-2 bg-accent-fill text-white font-medium text-[0.9375rem] px-8 py-3.5 rounded-full shadow-md hover:bg-accent-h hover:shadow-lg hover:-translate-y-0.5 transition-all">
+          Start a Project
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#approach"
+           class="group inline-flex items-center gap-1 text-accent font-medium text-[0.9375rem] hover:text-accent-hover transition-colors">
+          Our approach <span class="arrow-slide">&rarr;</span>
+        </a>
+      </div>
+
+      <div class="flex gap-12 mt-16 pt-8 border-t border-theme justify-center lg:justify-start flex-wrap">
+        <div>
+          <div class="font-heading text-2xl md:text-[2rem] font-bold text-primary leading-none mb-1">10+</div>
+          <div class="text-[0.8125rem] text-muted font-medium">Years shipping</div>
+        </div>
+        <div>
+          <div class="font-heading text-2xl md:text-[2rem] font-bold text-primary leading-none mb-1">50+</div>
+          <div class="text-[0.8125rem] text-muted font-medium">Products delivered</div>
+        </div>
+        <div>
+          <div class="font-heading text-2xl md:text-[2rem] font-bold text-primary leading-none mb-1">100%</div>
+          <div class="text-[0.8125rem] text-muted font-medium">Outcome focused</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Abstract graphic -->
+    <div class="relative z-[1] hidden lg:block fade-in" style="transition-delay:200ms">
+      <div class="w-full aspect-square relative">
+
+        <!-- Mock dashboard card -->
+        <div class="absolute w-[65%] h-[65%] top-[10%] left-[15%] z-[3]
+                    bg-card border border-theme rounded-2xl shadow-lg
+                    flex flex-col p-8 gap-4">
+          <div class="h-2 rounded bg-accent-fill opacity-70" style="width:40%"></div>
+          <div class="flex gap-2 items-center">
+            <div class="w-2 h-2 rounded-full bg-accent-fill opacity-50"></div>
+            <div class="flex-1 h-1.5 rounded bg-elevated"></div>
+          </div>
+          <div class="flex gap-2 items-center">
+            <div class="w-2 h-2 rounded-full bg-accent-fill opacity-30"></div>
+            <div class="w-2/5 h-1.5 rounded bg-elevated"></div>
+          </div>
+          <div class="h-2 rounded bg-elevated mt-auto" style="width:70%"></div>
+          <div class="h-2 rounded bg-elevated" style="width:55%"></div>
+          <div class="flex gap-2 items-center">
+            <div class="w-2 h-2 rounded-full bg-accent-fill opacity-50"></div>
+            <div class="flex-1 h-1.5 rounded bg-elevated"></div>
+          </div>
+        </div>
+
+        <!-- Chart card -->
+        <div class="absolute w-[45%] h-[35%] bottom-[5%] right-[5%] z-[2]
+                    bg-accent-fill rounded-xl opacity-90
+                    flex items-end justify-center px-6 pb-4">
+          <div class="flex items-end gap-1.5 h-[60%] w-full">
+            <div class="chart-bar flex-1 bg-white/30 rounded-t-sm"></div>
+            <div class="chart-bar flex-1 bg-white/30 rounded-t-sm"></div>
+            <div class="chart-bar flex-1 bg-white/30 rounded-t-sm"></div>
+            <div class="chart-bar flex-1 bg-white/30 rounded-t-sm"></div>
+            <div class="chart-bar flex-1 bg-white/30 rounded-t-sm"></div>
+            <div class="chart-bar flex-1 bg-white/30 rounded-t-sm"></div>
+            <div class="chart-bar flex-1 bg-white/30 rounded-t-sm"></div>
+          </div>
+        </div>
+
+        <!-- Background circle -->
+        <div class="absolute w-[30%] h-[30%] top-0 right-[10%] z-[1]
+                    bg-accent-l rounded-full opacity-50"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== APPROACH ==================== -->
+<section id="approach" class="py-32 bg-primary transition-colors duration-300">
+  <div class="max-w-[1200px] mx-auto px-6">
+
+    <div class="fade-in">
+      <span class="inline-flex items-center gap-2 text-[0.8125rem] font-semibold uppercase tracking-widest text-accent mb-6 section-dash">Our Approach</span>
+      <h2 class="font-heading font-bold text-primary mb-6" style="font-size:clamp(1.75rem,3.5vw,3rem)">
+        Three pillars.<br>One purpose.
+      </h2>
+      <p class="text-secondary max-w-[55ch] leading-relaxed" style="font-size:clamp(1.0625rem,1.5vw,1.1875rem)">
+        Every product we build stands on a foundation of measurable outcomes,
+        thoughtful experiences, and reliable delivery.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+
+      <!-- Card 1 -->
+      <div class="bg-card border border-theme rounded-xl p-10 card-lift accent-bar fade-in">
+        <div class="w-12 h-12 rounded-lg bg-accent-s flex items-center justify-center text-accent mb-6">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3 class="font-heading font-semibold text-primary text-lg mb-4">Optimise for Outcomes</h3>
+        <p class="text-secondary text-[0.9375rem] leading-relaxed">We don't ship features for the sake of it. Every decision is measured against the outcomes that matter to your business and your users.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-card border border-theme rounded-xl p-10 card-lift accent-bar fade-in" style="transition-delay:100ms">
+        <div class="w-12 h-12 rounded-lg bg-accent-s flex items-center justify-center text-accent mb-6">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="font-heading font-semibold text-primary text-lg mb-4">Pleasant Experiences</h3>
+        <p class="text-secondary text-[0.9375rem] leading-relaxed">Great products feel right. We obsess over the details &mdash; interaction patterns, performance, accessibility &mdash; that make users love what they use.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-card border border-theme rounded-xl p-10 card-lift accent-bar fade-in" style="transition-delay:200ms">
+        <div class="w-12 h-12 rounded-lg bg-accent-s flex items-center justify-center text-accent mb-6">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <h3 class="font-heading font-semibold text-primary text-lg mb-4">Deliver on Promises</h3>
+        <p class="text-secondary text-[0.9375rem] leading-relaxed">Reliable. Predictable. Consistent. We commit to timelines and quality standards, then follow through. No excuses, no surprises.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== SERVICES ==================== -->
+<section id="services" class="py-32 bg-alt transition-colors duration-300">
+  <div class="max-w-[1200px] mx-auto px-6">
+
+    <div class="fade-in">
+      <span class="inline-flex items-center gap-2 text-[0.8125rem] font-semibold uppercase tracking-widest text-accent mb-6 section-dash">What We Do</span>
+      <h2 class="font-heading font-bold text-primary mb-6" style="font-size:clamp(1.75rem,3.5vw,3rem)">
+        Services built<br>around outcomes.
+      </h2>
+      <p class="text-secondary max-w-[55ch] leading-relaxed" style="font-size:clamp(1.0625rem,1.5vw,1.1875rem)">
+        From strategy to shipping, we partner with teams to turn ambition into working products.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-16">
+
+      <!-- Service 1 -->
+      <div class="bg-card border border-theme rounded-xl p-10 card-lift flex flex-col sm:flex-row gap-6 items-start fade-in">
+        <div class="font-heading text-5xl font-bold text-accent opacity-20 leading-none shrink-0">01</div>
+        <div>
+          <h3 class="font-heading font-semibold text-primary text-lg mb-2">Product Strategy &amp; Discovery</h3>
+          <p class="text-secondary text-[0.9375rem] leading-relaxed mb-4">Define the right problem, validate the approach, and map the path from idea to measurable outcome.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">User Research</span>
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">Roadmapping</span>
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">OKRs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="bg-card border border-theme rounded-xl p-10 card-lift flex flex-col sm:flex-row gap-6 items-start fade-in" style="transition-delay:100ms">
+        <div class="font-heading text-5xl font-bold text-accent opacity-20 leading-none shrink-0">02</div>
+        <div>
+          <h3 class="font-heading font-semibold text-primary text-lg mb-2">Experience Design</h3>
+          <p class="text-secondary text-[0.9375rem] leading-relaxed mb-4">Craft interfaces and interactions that feel intuitive, look beautiful, and drive the outcomes that matter.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">UX/UI</span>
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">Prototyping</span>
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">Design Systems</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="bg-card border border-theme rounded-xl p-10 card-lift flex flex-col sm:flex-row gap-6 items-start fade-in" style="transition-delay:200ms">
+        <div class="font-heading text-5xl font-bold text-accent opacity-20 leading-none shrink-0">03</div>
+        <div>
+          <h3 class="font-heading font-semibold text-primary text-lg mb-2">Engineering &amp; Delivery</h3>
+          <p class="text-secondary text-[0.9375rem] leading-relaxed mb-4">Build robust, scalable products with modern engineering practices. Ship reliably, iterate confidently.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">Full-Stack</span>
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">Cloud Native</span>
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">CI/CD</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="bg-card border border-theme rounded-xl p-10 card-lift flex flex-col sm:flex-row gap-6 items-start fade-in" style="transition-delay:300ms">
+        <div class="font-heading text-5xl font-bold text-accent opacity-20 leading-none shrink-0">04</div>
+        <div>
+          <h3 class="font-heading font-semibold text-primary text-lg mb-2">Growth &amp; Optimisation</h3>
+          <p class="text-secondary text-[0.9375rem] leading-relaxed mb-4">Measure what matters, experiment methodically, and continuously improve product performance.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">Analytics</span>
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">A/B Testing</span>
+            <span class="text-xs font-medium text-accent bg-accent-s border border-accent-l px-3 py-1 rounded-full">Performance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== VALUES ==================== -->
+<section id="values" class="py-32 bg-primary transition-colors duration-300">
+  <div class="max-w-[1200px] mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-16 items-start mt-0">
+
+      <!-- Left: sticky text -->
+      <div class="lg:sticky lg:top-32 fade-in">
+        <span class="inline-flex items-center gap-2 text-[0.8125rem] font-semibold uppercase tracking-widest text-accent mb-6 section-dash">Our Values</span>
+        <h2 class="font-heading font-bold text-primary mb-6" style="font-size:clamp(1.75rem,3.5vw,3rem)">
+          How we show up.<br>Every day.
+        </h2>
+        <p class="text-secondary max-w-[55ch] leading-relaxed" style="font-size:clamp(1.0625rem,1.5vw,1.1875rem)">
+          These aren't aspirational posters on a wall. They're the operating principles
+          that shape every decision, conversation, and line of code.
+        </p>
+      </div>
+
+      <!-- Right: value cards -->
+      <div class="flex flex-col gap-6">
+
+        <div class="group flex gap-6 p-8 rounded-xl bg-card border border-theme card-lift fade-in">
+          <div class="value-marker"></div>
+          <div>
+            <h3 class="font-heading font-semibold text-primary text-lg mb-2">Clarity over Cleverness</h3>
+            <p class="text-secondary text-[0.9375rem] leading-relaxed">Simple solutions that everyone understands beat complex ones that only their creator can maintain. We choose transparency in communication, architecture, and code.</p>
+          </div>
+        </div>
+
+        <div class="group flex gap-6 p-8 rounded-xl bg-card border border-theme card-lift fade-in" style="transition-delay:100ms">
+          <div class="value-marker"></div>
+          <div>
+            <h3 class="font-heading font-semibold text-primary text-lg mb-2">Own the Outcome</h3>
+            <p class="text-secondary text-[0.9375rem] leading-relaxed">We don't hand off and walk away. We stay accountable for results, not just deliverables. If the product doesn't move the needle, we haven't done our job.</p>
+          </div>
+        </div>
+
+        <div class="group flex gap-6 p-8 rounded-xl bg-card border border-theme card-lift fade-in" style="transition-delay:200ms">
+          <div class="value-marker"></div>
+          <div>
+            <h3 class="font-heading font-semibold text-primary text-lg mb-2">Pace with Purpose</h3>
+            <p class="text-secondary text-[0.9375rem] leading-relaxed">Moving fast matters, but not at the cost of quality. We find the rhythm that ships great work consistently without burning out or cutting corners.</p>
+          </div>
+        </div>
+
+        <div class="group flex gap-6 p-8 rounded-xl bg-card border border-theme card-lift fade-in" style="transition-delay:300ms">
+          <div class="value-marker"></div>
+          <div>
+            <h3 class="font-heading font-semibold text-primary text-lg mb-2">Respect the Craft</h3>
+            <p class="text-secondary text-[0.9375rem] leading-relaxed">Design, engineering, product &mdash; each discipline has depth. We hire specialists who care deeply about their craft and give them room to do their best work.</p>
+          </div>
+        </div>
+
+        <div class="group flex gap-6 p-8 rounded-xl bg-card border border-theme card-lift fade-in" style="transition-delay:400ms">
+          <div class="value-marker"></div>
+          <div>
+            <h3 class="font-heading font-semibold text-primary text-lg mb-2">Feedback is a Gift</h3>
+            <p class="text-secondary text-[0.9375rem] leading-relaxed">We actively seek out critique from users, teammates, and data. Honest feedback accelerates learning and drives better outcomes for everyone.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==================== CTA ==================== -->
+<section id="contact" class="py-32 bg-alt transition-colors duration-300">
+  <div class="max-w-[800px] mx-auto px-6 text-center">
+    <div class="bg-card border border-theme rounded-2xl px-8 py-24 md:px-16 relative overflow-hidden fade-in">
+
+      <!-- Glow background -->
+      <div class="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-glow pointer-events-none"></div>
+
+      <span class="relative inline-flex items-center justify-center gap-2 text-[0.8125rem] font-semibold uppercase tracking-widest text-accent mb-6 section-dash">Get in Touch</span>
+      <h2 class="relative font-heading font-bold text-primary mb-6" style="font-size:clamp(1.75rem,3.5vw,3rem)">
+        Ready to build something<br>that matters?
+      </h2>
+      <p class="relative text-secondary max-w-[55ch] mx-auto leading-relaxed mb-10" style="font-size:clamp(1.0625rem,1.5vw,1.1875rem)">
+        Let's talk about your product, your challenges, and how we can
+        help you deliver outcomes that move the needle.
+      </p>
+
+      <div class="relative flex items-center justify-center gap-6 flex-wrap">
+        <a href="mailto:hello@epdstudios.com"
+           class="inline-flex items-center gap-2 bg-accent-fill text-white font-medium text-[0.9375rem] px-8 py-3.5 rounded-full shadow-md hover:bg-accent-h hover:shadow-lg hover:-translate-y-0.5 transition-all">
+          Start a Conversation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="https://github.com/briostudio" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 bg-transparent text-primary font-medium text-[0.9375rem] px-8 py-3.5 rounded-full border-[1.5px] border-theme hover:border-accent-l hover:text-accent hover:bg-accent-s transition-all">
+          View on GitHub
+        </a>
+      </div>
+
+      <div class="relative flex items-center justify-center gap-2 mt-8 text-sm text-muted">
+        <span>or reach out directly at</span>
+        <a href="mailto:hello@epdstudios.com" class="text-secondary font-medium hover:text-accent transition-colors">hello@epdstudios.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+<footer class="bg-primary border-t border-theme pt-24 pb-8 transition-colors duration-300">
+  <div class="max-w-[1200px] mx-auto px-6">
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr] gap-12 mb-16">
+
+      <!-- Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="/" class="flex items-center gap-1.5 no-underline text-primary mb-6">
+          <span class="font-heading font-bold text-xl tracking-tight bg-accent-fill text-white px-2 py-0.5 rounded">EPD</span>
+          <span class="font-heading font-semibold text-lg tracking-tight">Studios</span>
+        </a>
+        <p class="text-[0.9375rem] text-muted leading-relaxed">Optimising for outcomes.<br>Delivering on promises.</p>
+      </div>
+
+      <!-- Navigate -->
+      <div class="flex flex-col gap-2">
+        <h4 class="font-heading font-semibold text-sm text-primary uppercase tracking-wider mb-2">Navigate</h4>
+        <a href="#approach" class="text-sm text-secondary hover:text-accent py-1 transition-colors">Approach</a>
+        <a href="#services" class="text-sm text-secondary hover:text-accent py-1 transition-colors">Services</a>
+        <a href="#values"   class="text-sm text-secondary hover:text-accent py-1 transition-colors">Values</a>
+        <a href="#contact"  class="text-sm text-secondary hover:text-accent py-1 transition-colors">Contact</a>
+      </div>
+
+      <!-- Connect -->
+      <div class="flex flex-col gap-2">
+        <h4 class="font-heading font-semibold text-sm text-primary uppercase tracking-wider mb-2">Connect</h4>
+        <a href="https://github.com/briostudio" target="_blank" rel="noopener" class="text-sm text-secondary hover:text-accent py-1 transition-colors">GitHub</a>
+        <a href="https://twitter.com/epdstudios" target="_blank" rel="noopener" class="text-sm text-secondary hover:text-accent py-1 transition-colors">Twitter</a>
+        <a href="mailto:hello@epdstudios.com" class="text-sm text-secondary hover:text-accent py-1 transition-colors">Email</a>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-subtle">
+      <p class="text-[0.8125rem] text-muted">&copy; 2026 EPD Studios. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+  <script>
+// ============================================
+// Theme Toggle — Tailwind dark class strategy
+// ============================================
+
+(function () {
+  var STORAGE_KEY = 'epd-theme';
+  var root = document.documentElement;
+  var toggle = document.getElementById('theme-toggle');
+
+  function getPreferredTheme() {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return saved;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+
+  function setTheme(theme) {
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem(STORAGE_KEY, theme);
+  }
+
+  // Initial apply (also runs from inline script in <head> to avoid flash)
+  setTheme(getPreferredTheme());
+
+  // Toggle button
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var next = root.classList.contains('dark') ? 'light' : 'dark';
+      setTheme(next);
+    });
+  }
+
+  // React to system preference changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+    if (!localStorage.getItem(STORAGE_KEY)) {
+      setTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+})();
+
+</script>
+  <script>
+// ============================================
+// EPD Studios — Main JS
+// ============================================
+
+(function () {
+
+  // ------------------------------------------
+  // Mobile Menu Toggle
+  // ------------------------------------------
+  var menuToggle = document.getElementById('mobile-menu-toggle');
+  var mobileMenu = document.getElementById('mobile-menu');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', function () {
+      menuToggle.classList.toggle('active');
+      // Toggle between hidden and flex display
+      if (mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex');
+      } else {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      }
+    });
+
+    // Close on link click
+    mobileMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        menuToggle.classList.remove('active');
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      });
+    });
+  }
+
+  // ------------------------------------------
+  // Intersection Observer — Fade In on Scroll
+  // ------------------------------------------
+  var fadeElements = document.querySelectorAll('.fade-in');
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    fadeElements.forEach(function (el) {
+      observer.observe(el);
+    });
+  } else {
+    fadeElements.forEach(function (el) {
+      el.classList.add('visible');
+    });
+  }
+
+  // ------------------------------------------
+  // Smooth scroll for anchor links
+  // ------------------------------------------
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+
+      var target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        var offset = 80; // header height
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ------------------------------------------
+  // Header shadow on scroll
+  // ------------------------------------------
+  var header = document.querySelector('header');
+
+  if (header) {
+    window.addEventListener('scroll', function () {
+      if (window.pageYOffset > 100) {
+        header.classList.add('shadow-md');
+      } else {
+        header.classList.remove('shadow-md');
+      }
+    });
+  }
+
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+/* =============================================
+   EPD Studios — Central Stylesheet
+   =============================================
+   All design tokens, custom properties, and
+   component-level overrides live in this one
+   file. Tailwind utilities handle layout and
+   spacing; this file owns colour, motion, and
+   reusable patterns.
+   ============================================= */
+
+
+/* ===========================================
+   1. DESIGN TOKENS — LIGHT
+   =========================================== */
+
+:root,
+.light {
+  --color-bg:             #FAFAFA;
+  --color-bg-alt:         #FFFFFF;
+  --color-bg-elevated:    #F0F0F0;
+  --color-surface:        #FFFFFF;
+  --color-surface-hover:  #F5F5F5;
+  --color-border:         #E5E5E5;
+  --color-border-subtle:  #EBEBEB;
+
+  --color-text:           #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-text-muted:     #999999;
+
+  --color-accent:         #2563EB;
+  --color-accent-hover:   #1D4ED8;
+  --color-accent-light:   #DBEAFE;
+  --color-accent-subtle:  #EFF6FF;
+
+  --header-bg:            rgba(250, 250, 250, 0.85);
+  --hero-gradient:        linear-gradient(135deg, #FAFAFA 0%, #F0F4FF 50%, #FAFAFA 100%);
+  --card-bg:              #FFFFFF;
+  --card-border:          #E5E5E5;
+  --glow:                 rgba(37, 99, 235, 0.08);
+}
+
+
+/* ===========================================
+   2. DESIGN TOKENS — DARK
+   =========================================== */
+
+.dark {
+  --color-bg:             #0A0A0A;
+  --color-bg-alt:         #111111;
+  --color-bg-elevated:    #1A1A1A;
+  --color-surface:        #161616;
+  --color-surface-hover:  #1E1E1E;
+  --color-border:         #2A2A2A;
+  --color-border-subtle:  #222222;
+
+  --color-text:           #F5F5F5;
+  --color-text-secondary: #A0A0A0;
+  --color-text-muted:     #666666;
+
+  --color-accent:         #60A5FA;
+  --color-accent-hover:   #93C5FD;
+  --color-accent-light:   #1E3A5F;
+  --color-accent-subtle:  #0F1D2F;
+
+  --header-bg:            rgba(10, 10, 10, 0.85);
+  --hero-gradient:        linear-gradient(135deg, #0A0A0A 0%, #0F1525 50%, #0A0A0A 100%);
+  --card-bg:              #161616;
+  --card-border:          #2A2A2A;
+  --glow:                 rgba(96, 165, 250, 0.06);
+}
+
+
+/* ===========================================
+   3. BASE
+   =========================================== */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+
+/* ===========================================
+   4. SEMANTIC COLOUR UTILITIES
+   Map Tailwind-style classes → CSS variables
+   so markup stays readable.
+   =========================================== */
+
+/* Backgrounds */
+.bg-primary      { background-color: var(--color-bg); }
+.bg-alt          { background-color: var(--color-bg-alt); }
+.bg-elevated     { background-color: var(--color-bg-elevated); }
+.bg-surface      { background-color: var(--color-surface); }
+.bg-card         { background-color: var(--card-bg); }
+.bg-hero         { background: var(--hero-gradient); }
+.bg-header       { background: var(--header-bg); }
+.bg-accent-s     { background-color: var(--color-accent-subtle); }
+.bg-accent-fill  { background-color: var(--color-accent); }
+.bg-accent-h     { background-color: var(--color-accent-hover); }
+.bg-glow         { background: radial-gradient(circle, var(--glow) 0%, transparent 60%); }
+
+/* Text */
+.text-primary    { color: var(--color-text); }
+.text-secondary  { color: var(--color-text-secondary); }
+.text-muted      { color: var(--color-text-muted); }
+.text-accent     { color: var(--color-accent); }
+
+/* Borders */
+.border-theme    { border-color: var(--color-border); }
+.border-subtle   { border-color: var(--color-border-subtle); }
+.border-accent-l { border-color: var(--color-accent-light); }
+
+
+/* ===========================================
+   5. COMPONENT PATTERNS
+   =========================================== */
+
+/* --- Nav link animated underline --- */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transition: width 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-underline:hover::after {
+  width: 100%;
+}
+
+/* --- Card lift on hover --- */
+.card-lift {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-accent-light);
+}
+.dark .card-lift:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Top-bar accent (approach cards) --- */
+.accent-bar {
+  position: relative;
+  overflow: hidden;
+}
+.accent-bar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accent-bar:hover::before {
+  transform: scaleX(1);
+}
+
+/* --- Value-item left marker --- */
+.value-marker {
+  width: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  background: var(--color-accent);
+  opacity: 0.5;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.group:hover .value-marker {
+  opacity: 1;
+}
+
+/* --- Section label dash --- */
+.section-dash::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+}
+
+
+/* ===========================================
+   6. ANIMATIONS
+   =========================================== */
+
+/* Scroll reveal */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pulsing dot */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+/* Floating particles */
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-20px) scale(1.2); }
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.15;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Arrow slide on hover */
+.arrow-slide {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.group:hover .arrow-slide,
+a:hover .arrow-slide {
+  transform: translateX(4px);
+}
+
+
+/* ===========================================
+   7. HERO MOCK UI
+   =========================================== */
+
+.chart-bar:nth-child(1) { height: 40%; }
+.chart-bar:nth-child(2) { height: 65%; }
+.chart-bar:nth-child(3) { height: 50%; }
+.chart-bar:nth-child(4) { height: 85%; }
+.chart-bar:nth-child(5) { height: 70%; }
+.chart-bar:nth-child(6) { height: 95%; }
+.chart-bar:nth-child(7) { height: 75%; }
+
+
+/* ===========================================
+   8. HAMBURGER MENU
+   =========================================== */
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 1px;
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}

@@ -1,0 +1,31 @@
+title: EPD Studios
+description: "We optimise for outcomes, create pleasant product experiences, and deliver on promises."
+url: "https://briostudio.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+# Plugins
+plugins:
+  - jekyll-seo-tag
+
+# Site settings
+author: EPD Studios
+email: hello@epdstudios.com
+twitter_username: epdstudios
+github_username: briostudio
+
+# Collections
+collections:
+  services:
+    output: true
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - LICENSE
