@@ -171,7 +171,7 @@
       size: size,
       maxSize: size,
       life: 1,
-      decay: randomRange(0.012, 0.025),
+      decay: randomRange(0.008, 0.018),
       color: color,
       rotation: Math.random() * Math.PI * 2,
       rotSpeed: randomRange(-0.05, 0.05),
