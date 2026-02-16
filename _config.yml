@@ -16,11 +16,6 @@ email: hello@epdstudios.com
 twitter_username: epdstudios
 github_username: briostudio
 
-# Collections
-collections:
-  services:
-    output: true
-
 # Exclude from processing
 exclude:
   - Gemfile
