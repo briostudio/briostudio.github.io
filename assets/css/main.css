@@ -39,32 +39,40 @@
   --gradient-text:        linear-gradient(135deg, #38BDF8 0%, #818CF8 40%, #A78BFA 100%);
 
   --header-bg:            rgba(254, 254, 254, 0.85);
-  --hero-gradient:        linear-gradient(135deg, #FEFEFE 0%, #F0F0FF 30%, #E8F4FD 60%, #F5F3FF 100%);
+
+  /* Light cosmic hero — very subtle radials */
+  --hero-gradient:
+    radial-gradient(ellipse 80% 60% at 15% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 85% 30%, rgba(56, 189, 248, 0.04) 0%, transparent 55%),
+    linear-gradient(135deg, #FEFEFE 0%, #F8F6FF 30%, #EFF6FF 60%, #F5F3FF 100%);
+
+  --cosmic-section: none;
+
   --card-bg:              #FFFFFF;
   --card-border:          #E8E0F7;
   --glow:                 rgba(124, 58, 237, 0.06);
 
-  /* Sparkle colours */
+  /* Sparkle colours — with cosmic green */
   --sparkle-1:            #38BDF8;
   --sparkle-2:            #818CF8;
   --sparkle-3:            #A78BFA;
-  --sparkle-4:            #C084FC;
+  --sparkle-4:            #34D399;
 }
 
 
 /* ===========================================
    2. DESIGN TOKENS — DARK
-   Deeper purples, luminous highlights
+   Cosmic universe with nebula depth
    =========================================== */
 
 .dark {
-  --color-bg:             #0C0A14;
-  --color-bg-alt:         #110E1C;
-  --color-bg-elevated:    #1A1528;
-  --color-surface:        #15112A;
-  --color-surface-hover:  #1E1835;
-  --color-border:         #2A2540;
-  --color-border-subtle:  #211D35;
+  --color-bg:             #060410;
+  --color-bg-alt:         #0A0818;
+  --color-bg-elevated:    #151024;
+  --color-surface:        #110D22;
+  --color-surface-hover:  #1A1530;
+  --color-border:         #2A2545;
+  --color-border-subtle:  #1E1A35;
 
   --color-text:           #F0ECF9;
   --color-text-secondary: #A8A0C0;
@@ -79,16 +87,30 @@
   --gradient-accent-hover:linear-gradient(135deg, #7DD3FC 0%, #A5B4FC 50%, #D8B4FE 100%);
   --gradient-text:        linear-gradient(135deg, #7DD3FC 0%, #A5B4FC 40%, #C4B5FD 100%);
 
-  --header-bg:            rgba(12, 10, 20, 0.85);
-  --hero-gradient:        linear-gradient(135deg, #0C0A14 0%, #13102A 30%, #0E1525 60%, #110E1C 100%);
-  --card-bg:              #15112A;
-  --card-border:          #2A2540;
-  --glow:                 rgba(167, 139, 250, 0.06);
+  --header-bg:            rgba(6, 4, 16, 0.8);
 
+  /* Cosmic nebula hero — layered radial gradients */
+  --hero-gradient:
+    radial-gradient(ellipse 80% 60% at 15% 50%, rgba(139, 92, 246, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 70% at 85% 30%, rgba(56, 189, 248, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 100%, rgba(192, 132, 252, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 40% at 60% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, #060410 0%, #0A0818 40%, #0E0B1E 100%);
+
+  /* Cosmic section backgrounds — subtle nebula glow */
+  --cosmic-section:
+    radial-gradient(ellipse 70% 50% at 80% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 20% 60%, rgba(56, 189, 248, 0.06) 0%, transparent 50%);
+
+  --card-bg:              rgba(17, 13, 34, 0.85);
+  --card-border:          rgba(42, 37, 69, 0.7);
+  --glow:                 rgba(167, 139, 250, 0.08);
+
+  /* Sparkle palette — brighter with cosmic green */
   --sparkle-1:            #7DD3FC;
   --sparkle-2:            #A5B4FC;
-  --sparkle-3:            #C4B5FD;
-  --sparkle-4:            #D8B4FE;
+  --sparkle-3:            #D8B4FE;
+  --sparkle-4:            #86EFAC;
 }
 
 
@@ -112,9 +134,9 @@ html {
    4. SEMANTIC COLOUR UTILITIES
    =========================================== */
 
-/* Backgrounds */
-.bg-primary      { background-color: var(--color-bg); }
-.bg-alt          { background-color: var(--color-bg-alt); }
+/* Backgrounds — with optional cosmic overlay in dark mode */
+.bg-primary      { background-color: var(--color-bg); background-image: var(--cosmic-section); }
+.bg-alt          { background-color: var(--color-bg-alt); background-image: var(--cosmic-section); }
 .bg-elevated     { background-color: var(--color-bg-elevated); }
 .bg-surface      { background-color: var(--color-surface); }
 .bg-card         { background-color: var(--card-bg); }
@@ -309,4 +331,44 @@ a:hover .arrow-slide { transform: translateX(4px); }
   width: 100%; height: 100%;
   pointer-events: none;
   z-index: 9999;
+}
+
+
+/* ===========================================
+   10. AMBIENT STAR FIELD
+   Fixed twinkling stars across full viewport
+   =========================================== */
+
+#ambient-stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ambient-star {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  animation: twinkle var(--tw-dur, 3s) ease-in-out infinite;
+  animation-delay: var(--tw-del, 0s);
+  box-shadow: 0 0 var(--tw-glow, 2px) currentColor;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50%      { opacity: 0.9;  transform: scale(1.1); }
+}
+
+/* Brighter stars in dark mode */
+.dark .ambient-star {
+  animation-name: twinkle-dark;
+}
+
+@keyframes twinkle-dark {
+  0%, 100% { opacity: 0.2;  transform: scale(0.8); }
+  50%      { opacity: 1;    transform: scale(1.2); }
 }
